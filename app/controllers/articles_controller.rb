@@ -9,8 +9,11 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(params[:article])
-    @article.save
-    redirect_to root_url
+    if @article.save
+      redirect_to root_url, :notice => 'The article has been created.'
+    else
+      render :new
+    end
   end
 
   def show
